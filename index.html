@@ -3,7 +3,7 @@
 <html>
 
 <head>
-	<title>Min/Max Settings</title>
+	<title>Vaccinations France</title>
 	<script src="https://www.chartjs.org/dist/2.9.4/Chart.min.js"></script>
 	<script src="https://www.chartjs.org/samples/latest/utils.js"></script>
 	<style>
@@ -20,6 +20,8 @@
 		<canvas id="canvas"></canvas>
 	</div>
 	<script>
+		var origin = 247166;
+		var moy_3_d = (45351 + 51357 + 57333) / 3
 		var config = {
 			type: 'line',
 			data: {
@@ -35,10 +37,18 @@
 					fill: false,
 				}, {
 					label: 'Vaccination cumulées',
-					backgroundColor: window.chartColors.blue,
-					borderColor: window.chartColors.blue,
+					backgroundColor: window.chartColors.green,
+					borderColor: window.chartColors.green,
 					data: [516, 516, 516, 2000, 7000, 19500, 45695, 80000, 93000, 93000, 138477, 189834, 247166],
 					fill: true,
+				}, {
+					label: 'Projection suivant la moyenne des 3 derniers jours',
+					backgroundColor: window.chartColors.blue,
+					borderColor: window.chartColors.blue,
+					data: [516, 516, 516, 2000, 7000, 19500, 45695, 80000, 93000, 93000, 138477, 189834,origin,
+					origin + moy_3_d, origin + (moy_3_d * 2), origin + (moy_3_d * 3), origin + (moy_3_d * 4), origin + (moy_3_d * 5), origin + (moy_3_d * 6), origin + (moy_3_d * 7), origin + (moy_3_d * 8), origin + (moy_3_d * 9), origin + (moy_3_d * 10), origin + (moy_3_d * 11),
+					origin + (moy_3_d * 12), origin + (moy_3_d * 13), origin + (moy_3_d * 14), origin + (moy_3_d * 15), origin + (moy_3_d * 16), origin + (moy_3_d * 17), origin + (moy_3_d * 18)],
+					fill: false,
 				}]
 			},
 			options: {
@@ -51,7 +61,7 @@
 					yAxes: [{
 						ticks: {
 							min: 0,
-							max: 1000000
+							max: 1200000
 						}
 					}]
 				}
@@ -65,8 +75,10 @@
 	</script>
 	  </br>
 	  <div>
-	   source from :<a href="https://www.data.gouv.fr/fr/datasets/donnees-relatives-aux-personnes-vaccinees-contre-la-covid-19/"> https://www.data.gouv.fr/fr/datasets/donnees-relatives-aux-personnes-vaccinees-contre-la-covid-19 </a>
-	   source jusqu'au 10 janvier 2021 : <a href="https://covidtracker.fr/vaccintracker/"> vaccintracker </a>   
+	   <i>
+	   source from :<a href="https://www.data.gouv.fr/fr/datasets/donnees-relatives-aux-personnes-vaccinees-contre-la-covid-19/"> https://www.data.gouv.fr/fr/datasets/donnees-relatives-aux-personnes-vaccinees-contre-la-covid-19 </a><br>
+	   source jusqu'au 10 janvier 2021 : <a href="https://covidtracker.fr/vaccintracker/"> vaccintracker </a>
+		</i>
 	</div>
 </body>
 
