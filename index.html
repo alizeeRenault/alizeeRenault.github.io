@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html>
 
@@ -29,6 +30,7 @@
 	<script>
 		var origin = 247166;
 		var moy_3_d = (45351 + 51357 + 57333) / 3
+		var moy_7_d = (26195 + 34305 + 13000 + 0 + 45351 + 51357 + 57333) / 7
 		var config = {
 			type: 'line',
 			data: {
@@ -56,6 +58,15 @@
 					data: [516, 516, 516, 2000, 7000, 19500, 45695, 80000, 93000, 93000, 138477, 189834,origin,
 					origin + moy_3_d, origin + (moy_3_d * 2), origin + (moy_3_d * 3), origin + (moy_3_d * 4), origin + (moy_3_d * 5), origin + (moy_3_d * 6), origin + (moy_3_d * 7), origin + (moy_3_d * 8), origin + (moy_3_d * 9), origin + (moy_3_d * 10), origin + (moy_3_d * 11),
 					origin + (moy_3_d * 12), origin + (moy_3_d * 13), origin + (moy_3_d * 14), origin + (moy_3_d * 15), origin + (moy_3_d * 16), origin + (moy_3_d * 17), origin + (moy_3_d * 18)],
+					fill: false,
+				}, {
+					label: 'Projection suivant la moyenne des 7 derniers jours',
+					backgroundColor: window.chartColors.yellow,
+					borderColor: window.chartColors.yellow,
+					borderDash: [1, 10],
+					data: [516, 516, 516, 2000, 7000, 19500, 45695, 80000, 93000, 93000, 138477, 189834,origin,
+					origin + moy_7_d, origin + (moy_7_d * 2), origin + (moy_7_d * 3), origin + (moy_7_d * 4), origin + (moy_7_d * 5), origin + (moy_7_d * 6), origin + (moy_7_d * 7), origin + (moy_7_d * 8), origin + (moy_7_d * 9), origin + (moy_7_d * 10), origin + (moy_7_d * 11),
+					origin + (moy_7_d * 12), origin + (moy_7_d * 13), origin + (moy_7_d * 14), origin + (moy_7_d * 15), origin + (moy_7_d * 16), origin + (moy_7_d * 17), origin + (moy_7_d * 18)],
 					fill: false,
 				}]
 			},
