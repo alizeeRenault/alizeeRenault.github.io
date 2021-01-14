@@ -15,7 +15,7 @@
 	</style>
 </head>
   
-  <body style="background-color: rgb(21, 32, 43);color: rgb(23, 191, 99);">
+ <body style="background-color: rgb(21, 32, 43);color: rgb(23, 191, 99);">
 	<div style="width:50%;">
 		<canvas id="canvas"></canvas>
 	</div>
@@ -28,6 +28,25 @@
 		</div>
 	</div>
 	<script>
+
+
+		Chart.pluginService.register({
+			beforeDraw: function (chart, easing) {
+				if (chart.config.options.chartArea && chart.config.options.chartArea.backgroundColor) {
+					var helpers = Chart.helpers;
+					var ctx = chart.chart.ctx;
+					var chartArea = chart.chartArea;
+
+					ctx.save();
+					ctx.fillStyle = chart.config.options.chartArea.backgroundColor;
+					ctx.fillRect(chartArea.left, chartArea.top, chartArea.right - chartArea.left, chartArea.bottom - chartArea.top);
+					ctx.restore();
+				}
+			}
+		});
+
+
+
 		var origin = 247166;
 		var moy_3_d = (51357 + 57333 + 71050) / 3
 		var moy_7_d = (71050 + 34305 + 13000 + 0 + 45351 + 51357 + 57333) / 7
@@ -71,6 +90,12 @@
 				}]
 			},
 			options: {
+				legend: {
+	                labels: {
+	                    fontColor: "rgb(23, 191, 99)",
+	                    // fontSize: 18
+	                }
+	            },
 				responsive: true,
 				title: {
 					display: true,
@@ -79,10 +104,19 @@
 				scales: {
 					yAxes: [{
 						ticks: {
+							fontColor: "rgb(23, 191, 99)",
 							min: 0,
 							max: 1200000
 						}
-					}]
+					}],
+					xAxes: [{
+	                    ticks: {
+	                        fontColor: "rgb(23, 191, 99)",
+	                    }
+	                }]
+				},
+		    	chartArea: {
+					backgroundColor: 'rgb(25, 39, 52)'
 				}
 			}
 		};
@@ -166,6 +200,12 @@
 				}]
 			},
 			options: {
+				legend: {
+	                labels: {
+	                    fontColor: "rgb(23, 191, 99)",
+	                    // fontSize: 18
+	                }
+	            },
 				responsive: true,
 				tooltips: {
 					mode: 'index',
@@ -182,10 +222,19 @@
 				scales: {
 					yAxes: [{
 						ticks: {
+							fontColor: "rgb(23, 191, 99)",
 							min: 0,
 							max: 3000
 						}
-					}]
+					}],
+					xAxes: [{
+	                    ticks: {
+	                        fontColor: "rgb(23, 191, 99)",
+	                    }
+	                }]
+				},
+		    	chartArea: {
+					backgroundColor: 'rgb(25, 39, 52)'
 				}
 			}
 		};
@@ -253,6 +302,12 @@
 				}]
 			},
 			options: {
+				legend: {
+	                labels: {
+	                    fontColor: "rgb(23, 191, 99)",
+	                    // fontSize: 18
+	                }
+	            },
 				responsive: true,
 				tooltips: {
 					mode: 'index',
@@ -269,10 +324,19 @@
 				scales: {
 					yAxes: [{
 						ticks: {
+							fontColor: "rgb(23, 191, 99)",
 							min: 0,
 							max: 100000
 						}
-					}]
+					}],
+					xAxes: [{
+	                    ticks: {
+	                        fontColor: "rgb(23, 191, 99)",
+	                    }
+	                }]
+				},
+		    	chartArea: {
+					backgroundColor: 'rgb(25, 39, 52)'
 				}
 			}
 		};
