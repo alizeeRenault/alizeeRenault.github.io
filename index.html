@@ -75,6 +75,11 @@
 	<div class="vaccination" style="width:85%;display: none;">
 		<canvas id="canvas"></canvas>
 	</div>
+
+	<a href="#" class="button_bel" style="display: none;" onclick="get_belgium()">view the little north weird country</a>
+	<div class="vaccination_bel" style="width:85%;display: none;">
+		<canvas id="canvas_bel"></canvas>
+	</div>
 	<br>
 	<br>
 	<br>
@@ -90,16 +95,19 @@
 	<script>
 
 
-		var datatest = {};
+		var data_gl = {};
+
+		function get_belgium () {
+
+			load_vaccine_BEL(data_gl.BEL);
+		}
 
 		window.onload = function() {
 			$.get( "https://covid.ourworldindata.org/data/owid-covid-data.json", function( data ) {
-				// console.log(data.FRA.data[353])
 				$(".loader_vaccination").hide();
 				$(".vaccination").show();
-				console.log(data.FRA)
 				load_vaccine(data.FRA);
-				datatest = data.FRA;
+				data_gl = data;
 			}).fail(function() {
 				console.log( "error" );
 			});
