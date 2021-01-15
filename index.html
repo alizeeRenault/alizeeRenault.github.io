@@ -72,15 +72,20 @@
 	<div class="loader_vaccination loader">
 		<div class="loader__lightning"></div>
 	</div>
-	<div class="vaccination" style="width:85%;display: none;">
+	<div id="france" class="vaccination" style="width:85%;display: none;">
 		<canvas id="canvas"></canvas>
 	</div>
 
-	<a href="#" class="button_bel" style="display: none;" onclick="get_belgium()">view the little north weird country</a>
-	<div class="vaccination_bel" style="width:85%;display: none;">
+	<div id="belgique" class="vaccination_bel" style="width:85%;display: none;">
 		<canvas id="canvas_bel"></canvas>
 	</div>
+	<div id="israel" class="vaccination_israel" style="width:85%;display: none;">
+		<canvas id="canvas_israel"></canvas>
+	</div>
 	<br>
+	<a href="#belgique" class="button_bel" style="display: none;" onclick="get_belgium()">Belgique</a>
+	<a href="#france" class="button_france" style="display: none;" onclick="get_france()">France</a>
+	<a href="#israel" class="button_israel" style="display: none;" onclick="get_israel()">Israël</a>
 	<br>
 	<br>
 	<br>
@@ -98,8 +103,34 @@
 		var data_gl = {};
 
 		function get_belgium () {
-
 			load_vaccine_BEL(data_gl.BEL);
+
+			$(".vaccination_bel").show();
+			$(".vaccination_israel").hide();
+			$(".vaccination").hide();
+			$(".button_bel").hide();
+			$(".button_france").show();
+			$(".button_israel").show();
+		}
+		function get_israel () {
+			load_vaccine_ISR(data_gl.ISR);
+
+			$(".vaccination_bel").hide();
+			$(".vaccination_israel").show();
+			$(".vaccination").hide();
+			$(".button_bel").show();
+			$(".button_france").show();
+			$(".button_israel").hide();
+		}
+		function get_france () {
+			load_vaccine(data_gl.FRA);
+
+			$(".vaccination_bel").hide();
+			$(".vaccination_israel").hide();
+			$(".vaccination").show();
+			$(".button_bel").show();
+			$(".button_france").hide();
+			$(".button_israel").show();
 		}
 
 		window.onload = function() {
@@ -108,6 +139,8 @@
 				$(".vaccination").show();
 				load_vaccine(data.FRA);
 				data_gl = data;
+				$(".button_bel").show();
+				$(".button_israel").show();
 			}).fail(function() {
 				console.log( "error" );
 			});
