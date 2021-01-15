@@ -16,17 +16,17 @@
 
 function load_vaccine(FRA) {
 		var sliced_arr = FRA.data.slice(347);
-		total_vaccinations = [516, 516, 516, 2000].concat(sliced_arr.map(x => x.total_vaccinations));
-		new_vaccinations = [164, 0, 0, 1484].concat(sliced_arr.map(x => x.new_vaccinations));
+		var total_vaccinations = [516, 516, 516, 2000].concat(sliced_arr.map(x => x.total_vaccinations));
+		var new_vaccinations = [164, 0, 0, 1484].concat(sliced_arr.map(x => x.new_vaccinations));
 		var length = sliced_arr.length;
 		var origin = sliced_arr[length - 1].total_vaccinations;
 		
 		var moy_3_d = (sliced_arr[length - 3].new_vaccinations + sliced_arr[length - 2].new_vaccinations + sliced_arr[length - 1].new_vaccinations) / 3;
 		var moy_7_d = (sliced_arr[length - 7].new_vaccinations + sliced_arr[length - 6].new_vaccinations + sliced_arr[length - 5].new_vaccinations + sliced_arr[length - 4].new_vaccinations + sliced_arr[length - 3].new_vaccinations + sliced_arr[length - 2].new_vaccinations + sliced_arr[length - 1].new_vaccinations) / 7;
 
-		length_projection = 31 - sliced_arr.length;
-		project_3_d = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31].map( x => origin + (moy_3_d * x))
-		project_7_d = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31].map( x => origin + (moy_7_d * x))
+		var length_projection = 31 - sliced_arr.length;
+		var project_3_d = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31].map( x => origin + (moy_3_d * x))
+		var project_7_d = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31].map( x => origin + (moy_7_d * x))
 		var config = {
 			type: 'line',
 			data: {
@@ -100,11 +100,113 @@ function load_vaccine(FRA) {
 			}
 		};
 
+	$(".button_bel").show()
 	var ctx = document.getElementById('canvas').getContext('2d');
 	window.myLine = new Chart(ctx, config);
 }
 
 
+function load_vaccine_BEL(country) {
+		var sliced_arr = country.data.slice(332);
+		var total_vaccinations = [];
+		var tot = 0;
+		for (var item in sliced_arr) {
+			if (sliced_arr[item].total_vaccinations) {
+				total_vaccinations.push(sliced_arr[item].total_vaccinations);
+				tot = sliced_arr[item].total_vaccinations;
+			}
+			else
+				total_vaccinations.push(tot);
+
+		}
+		var new_vaccinations = sliced_arr.map(x => (x.new_vaccinations ? x.new_vaccinations : 0));
+		var length = sliced_arr.length;
+		var origin = sliced_arr[length - 1].total_vaccinations;
+		
+		var moy_3_d = (new_vaccinations[length - 3] + new_vaccinations[length - 2] + new_vaccinations[length - 1]) / 3;
+		var moy_7_d = (new_vaccinations[length - 7] + new_vaccinations[length - 6] + new_vaccinations[length - 5] + new_vaccinations[length - 4] + new_vaccinations[length - 3] + new_vaccinations[length - 2] + new_vaccinations[length - 1]) / 7;
+
+		var length_projection = 31 - sliced_arr.length;
+		var project_3_d = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31].map( x => origin + (moy_3_d * x))
+		var project_7_d = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31].map( x => origin + (moy_7_d * x))
+		var config = {
+			type: 'line',
+			data: {
+				labels: ['1 janvier','2 janvier','3 janvier','4 janvier','5 janvier','6 janvier','7 janvier','8 janvier','9 janvier','10 janvier',
+					'11 janvier', '12 janvier', '13 janvier', '14 janvier', '15 janvier', '16 janvier', '17 janvier', '18 janvier',
+					'19 janvier', '20 janvier', '21 janvier', '22 janvier', '23 janvier', '24 janvier', '25 janvier', '26 janvier', '27 janvier',
+					'28 janvier', '29 janvier', '30 janvier', '31 janvier'],
+				datasets: [{
+					label: 'Vaccination quotidienne',
+					backgroundColor: window.chartColors.red,
+					borderColor: window.chartColors.red,
+					data: new_vaccinations,
+					fill: false,
+				}, {
+					label: 'Vaccination cumulées',
+					backgroundColor: window.chartColors.green,
+					borderColor: window.chartColors.green,
+					data: total_vaccinations,
+					fill: true,
+				}, {
+					label: 'Projection suivant la moyenne des 3 derniers jours',
+					backgroundColor: window.chartColors.blue,
+					borderColor: window.chartColors.blue,
+					borderDash: [1, 10],
+					fill: false,
+					// data: [516, 516, 516, 2000, 7000, 19500, 45695, 80000, 93000, 93000, 138477, 189834,247166, origin,
+					// origin + moy_3_d, origin + (moy_3_d * 2), origin + (moy_3_d * 3), origin + (moy_3_d * 4), origin + (moy_3_d * 5), origin + (moy_3_d * 6), origin + (moy_3_d * 7), origin + (moy_3_d * 8), origin + (moy_3_d * 9), origin + (moy_3_d * 10), origin + (moy_3_d * 11),
+					// origin + (moy_3_d * 12), origin + (moy_3_d * 13), origin + (moy_3_d * 14), origin + (moy_3_d * 15), origin + (moy_3_d * 16), origin + (moy_3_d * 17)],
+					data: total_vaccinations.concat(project_3_d),
+				}, {
+					label: 'Projection suivant la moyenne des 7 derniers jours',
+					backgroundColor: window.chartColors.yellow,
+					borderColor: window.chartColors.yellow,
+					borderDash: [1, 10],
+					data: total_vaccinations.concat(project_7_d),
+					// data: [516, 516, 516, 2000, 7000, 19500, 45695, 80000, 93000, 93000, 138477, 189834, 247166, origin,
+					// origin + moy_7_d, origin + (moy_7_d * 2), origin + (moy_7_d * 3), origin + (moy_7_d * 4), origin + (moy_7_d * 5), origin + (moy_7_d * 6), origin + (moy_7_d * 7), origin + (moy_7_d * 8), origin + (moy_7_d * 9), origin + (moy_7_d * 10), origin + (moy_7_d * 11),
+					// origin + (moy_7_d * 12), origin + (moy_7_d * 13), origin + (moy_7_d * 14), origin + (moy_7_d * 15), origin + (moy_7_d * 16), origin + (moy_7_d * 17)],
+					fill: false,
+				}]
+			},
+			options: {
+				legend: {
+	                labels: {
+	                    fontColor: "rgb(23, 191, 99)",
+	                    // fontSize: 18
+	                }
+	            },
+				responsive: true,
+				title: {
+					display: true,
+					text: 'Vaccination quotidiennes et cumulées en Belgique'
+				},
+				scales: {
+					yAxes: [{
+						ticks: {
+							fontColor: "rgb(23, 191, 99)",
+							min: 0,
+							max: 600000
+						}
+					}],
+					xAxes: [{
+	                    ticks: {
+	                        fontColor: "rgb(23, 191, 99)",
+	                    }
+	                }]
+				},
+		    	chartArea: {
+					backgroundColor: 'rgb(25, 39, 52)'
+				}
+			}
+		};
+	$(".vaccination_bel").show()
+
+	$(".button_bel").hide()
+	var ctx = document.getElementById('canvas_bel').getContext('2d');
+	window.myLine = new Chart(ctx, config);
+}
 
 
 
