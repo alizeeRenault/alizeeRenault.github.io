@@ -130,7 +130,7 @@
 	</div>
 
 	<div class="vaccination_usa data" style="width:85%;display: none;">
-		<i>will be available soon ... </i>
+		<canvas id="canvas_generic"></canvas>
 	</div>
 	<br>
 	<br>
@@ -175,7 +175,7 @@
 		var data_gl = {};
 
 		function get_usa () {
-			// load_vaccine_BEL(data_gl.BEL);
+			load_vaccine_generic(data_gl.USA);
 			load_month_view(data_gl.USA);
 			load_year_view(data_gl.USA);
 
