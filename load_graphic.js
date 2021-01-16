@@ -85,7 +85,7 @@ function load_vaccine(FRA) {
 						ticks: {
 							fontColor: "rgb(23, 191, 99)",
 							min: 0,
-							max: 1200000
+							max: Math.max(...total_vaccinations) * 3
 						}
 					}],
 					xAxes: [{
@@ -136,14 +136,9 @@ function load_vaccine_BEL(country) {
 		var moy_3_d = (new_vaccinations[length - 3] + new_vaccinations[length - 2] + new_vaccinations[length - 1]) / 3;
 		var moy_7_d = (new_vaccinations[length - 7] + new_vaccinations[length - 6] + new_vaccinations[length - 5] + new_vaccinations[length - 4] + new_vaccinations[length - 3] + new_vaccinations[length - 2] + new_vaccinations[length - 1]) / 7;
 
-		console.log(moy_3_d);
-		console.log(moy_7_d);
-		console.log(origin);
 		var length_projection = 31 - sliced_arr.length;
 		var project_3_d = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31].map( x => origin + (moy_3_d * x))
 		var project_7_d = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31].map( x => origin + (moy_7_d * x))
-		console.log(project_3_d);
-		console.log(project_7_d);
 		var config = {
 			type: 'line',
 			data: {
@@ -202,7 +197,7 @@ function load_vaccine_BEL(country) {
 						ticks: {
 							fontColor: "rgb(23, 191, 99)",
 							min: 0,
-							max: 600000
+							max: Math.max(...total_vaccinations) * 3
 						}
 					}],
 					xAxes: [{
@@ -223,7 +218,6 @@ function load_vaccine_BEL(country) {
 
 function load_vaccine_ISR(country) {
 		var sliced_arr = country.data.slice(341);
-	console.log(sliced_arr);
 		var total_vaccinations = [];
 		var tot = 0;
 		for (var item in sliced_arr) {
@@ -255,14 +249,9 @@ function load_vaccine_ISR(country) {
 		var moy_3_d = (new_vaccinations[length - 3] + new_vaccinations[length - 2] + new_vaccinations[length - 1]) / 3;
 		var moy_7_d = (new_vaccinations[length - 7] + new_vaccinations[length - 6] + new_vaccinations[length - 5] + new_vaccinations[length - 4] + new_vaccinations[length - 3] + new_vaccinations[length - 2] + new_vaccinations[length - 1]) / 7;
 
-		// console.log(moy_3_d);
-		// console.log(moy_7_d);
-		// console.log(origin);
 		var length_projection = 31 - sliced_arr.length;
 		var project_3_d = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31].map( x => origin + (moy_3_d * x))
 		var project_7_d = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31].map( x => origin + (moy_7_d * x))
-		// console.log(project_3_d);
-		// console.log(project_7_d);
 		var config = {
 			type: 'line',
 			data: {
@@ -321,7 +310,7 @@ function load_vaccine_ISR(country) {
 						ticks: {
 							fontColor: "rgb(23, 191, 99)",
 							min: 0,
-							max: 4000000
+							max: Math.max(...total_vaccinations) * 3
 						}
 					}],
 					xAxes: [{
@@ -346,51 +335,12 @@ function load_month_view(country) {
 		window.myLine_death.destroy();
 	var length = country.data.length;
 	var sliced_arr = country.data.slice(length - 62);
-	console.log(country.data);
 
 	var labels = sliced_arr.map(x => x.date);
 	var new_deaths = sliced_arr.map(x => x.new_deaths);
 	var new_cases = sliced_arr.map(x => x.new_cases);
 	var new_deaths_sm = sliced_arr.map(x => x.new_deaths_smoothed);
 	var new_cases_sm = sliced_arr.map(x => x.new_cases_smoothed);
-
-	// var length_sliced = sliced_arr.length;
-
-	// var lp = new_cases.slice(15, 30);
-	// var fp = new_cases.slice(0, 15);
-	// var lpd = new_deaths.slice(15, 30);
-	// var fpd = new_deaths.slice(0, 15);
-
-	// const reducer_death = (accumulator, currentValue) => accumulator + currentValue ? currentValue : 0;
-	// const reducer_case = (accumulator, currentValue) => accumulator + currentValue ? currentValue : 0;
-
-	// lpnum_d = lpd.reduce(reducer_death);
-	// fpnum_d = fpd.reduce(reducer_death);
-
-	// diff_death = (lpnum_d - fpnum_d) / 30;
-
-	// lpnum = lp.reduce(reducer_case);
-	// fpnum = fp.reduce(reducer_case);
-
-	// diff_cases = (lpnum - fpnum) / 30;
-	// console.log(diff_cases);
-	// console.log(diff_death);
-
-	// // var moy_7_death = (new_deaths[length_sliced - 8] + new_deaths[length_sliced - 7] + new_deaths[length_sliced - 6] + new_deaths[length_sliced - 5] + new_deaths[length_sliced - 4] + new_deaths[length_sliced - 3] + new_deaths[length_sliced - 2]) / 7;
-	// // var moy_7_case = (new_cases[length_sliced - 8] + new_cases[length_sliced - 7] + new_cases[length_sliced - 6] + new_cases[length_sliced - 5] + new_cases[length_sliced - 4] + new_cases[length_sliced - 3] + new_cases[length_sliced - 2]) / 7;
-	// var last_point = new_cases[length_sliced - 1] ? new_cases[length_sliced - 1] : new_cases[length_sliced - 2];
-	// project_7_cases = [];
-	// for (var item in sliced_arr) {
-	// 	project_7_cases.push(last_point + diff_cases);
-	// 	last_point += diff_cases;
-
-	// }
-	// var last_point = new_deaths[length_sliced - 1] ? new_deaths[length_sliced - 1] : new_deaths[length_sliced - 2];
-	// project_7_deaths = [];
-	// for (var item in sliced_arr) {
-	// 	project_7_deaths.push(last_point + diff_death);
-	// 	last_point += diff_death;
-	// }
 
 	var config = {
 			type: 'line',
@@ -410,17 +360,6 @@ function load_month_view(country) {
 					data: new_cases_sm,
 					fill: false,
 				}
-				// , {
-				// 	label: 'Projection des cas suivant la moyenne des 7 derniers jours',
-				// 	backgroundColor: window.chartColors.yellow,
-				// 	borderColor: window.chartColors.yellow,
-				// 	borderDash: [1, 10],
-				// 	data: new_cases.concat(project_7_cases),
-				// 	// data: [516, 516, 516, 2000, 7000, 19500, 45695, 80000, 93000, 93000, 138477, 189834, 247166, origin,
-				// 	// origin + moy_7_d, origin + (moy_7_d * 2), origin + (moy_7_d * 3), origin + (moy_7_d * 4), origin + (moy_7_d * 5), origin + (moy_7_d * 6), origin + (moy_7_d * 7), origin + (moy_7_d * 8), origin + (moy_7_d * 9), origin + (moy_7_d * 10), origin + (moy_7_d * 11),
-				// 	// origin + (moy_7_d * 12), origin + (moy_7_d * 13), origin + (moy_7_d * 14), origin + (moy_7_d * 15), origin + (moy_7_d * 16), origin + (moy_7_d * 17)],
-				// 	fill: false,
-				// }
 				]
 			},
 			options: {
@@ -440,7 +379,7 @@ function load_month_view(country) {
 						ticks: {
 							fontColor: "rgb(23, 191, 99)",
 							min: 0,
-							max: 50000
+							max: Math.max(...new_cases) * 3 / 2
 						}
 					}],
 					xAxes: [{
@@ -472,17 +411,6 @@ function load_month_view(country) {
 					data: new_deaths_sm,
 					fill: false,
 				}
-				// , {
-				// 	label: 'Projection des décès suivant la moyenne des 3 derniers jours',
-				// 	backgroundColor: window.chartColors.blue,
-				// 	borderColor: window.chartColors.blue,
-				// 	borderDash: [1, 10],
-				// 	fill: false,
-				// 	// data: [516, 516, 516, 2000, 7000, 19500, 45695, 80000, 93000, 93000, 138477, 189834,247166, origin,
-				// 	// origin + moy_3_d, origin + (moy_3_d * 2), origin + (moy_3_d * 3), origin + (moy_3_d * 4), origin + (moy_3_d * 5), origin + (moy_3_d * 6), origin + (moy_3_d * 7), origin + (moy_3_d * 8), origin + (moy_3_d * 9), origin + (moy_3_d * 10), origin + (moy_3_d * 11),
-				// 	// origin + (moy_3_d * 12), origin + (moy_3_d * 13), origin + (moy_3_d * 14), origin + (moy_3_d * 15), origin + (moy_3_d * 16), origin + (moy_3_d * 17)],
-				// 	data: new_deaths.concat(project_7_deaths),
-				// }
 				]
 			},
 			options: {
@@ -502,7 +430,7 @@ function load_month_view(country) {
 						ticks: {
 							fontColor: "rgb(23, 191, 99)",
 							min: 0,
-							max: 2000
+							max: Math.max(...new_deaths) * 3 / 2
 						}
 					}],
 					xAxes: [{
@@ -520,6 +448,129 @@ function load_month_view(country) {
 	window.myLine_case = new Chart(ctx, config);
 	var ctx = document.getElementById('canvas_month_FRA_deaths').getContext('2d');
 	window.myLine_death = new Chart(ctx, config2);
+
+}
+
+function load_year_view(country) {
+	if (window.myLine_year_case)
+		window.myLine_year_case.destroy();
+	if (window.myLine_year_death)
+		window.myLine_year_death.destroy();
+	var length = country.data.length;
+	var sliced_arr = country.data;
+
+	var labels = sliced_arr.map(x => x.date);
+	var new_deaths = sliced_arr.map(x => x.new_deaths);
+	var new_cases = sliced_arr.map(x => x.new_cases);
+	var new_deaths_sm = sliced_arr.map(x => x.new_deaths_smoothed);
+	var new_cases_sm = sliced_arr.map(x => x.new_cases_smoothed);
+	new_cases = new_cases.map( x => x ? x : 0);
+
+	var config = {
+			type: 'line',
+			data: {
+				labels: labels,//.concat(["+1", "+2", "+3", "+4", "+5", "+6", "+7", "+8", "+9", "+10", "+11", "+12", "+13", "+14", "+15", "+16", "+17", "+18", "+19", "+20", "+21", "+22", "+23", "+24", "+25", "+26", "+27", "+28", "+29", "+30", "+31"]),
+				datasets: [{
+					label: 'Moyenne glissante cas quotidiens',
+					backgroundColor: window.chartColors.red,
+					borderColor: window.chartColors.red,
+					data: new_cases_sm,
+					fill: false,
+				}, {
+					label: 'cas quotidiens',
+					backgroundColor: window.chartColors.blue,
+					borderColor: window.chartColors.blue,
+					data: new_cases,
+					borderDash: [1, 1],
+					fill: false,
+				}]
+			},
+			options: {
+				legend: {
+	                labels: {
+	                    fontColor: "rgb(23, 191, 99)",
+	                    // fontSize: 18
+	                }
+	            },
+				responsive: true,
+				title: {
+					display: true,
+					text: 'décès et cas COVID-19'
+				},
+				scales: {
+					yAxes: [{
+						ticks: {
+							fontColor: "rgb(23, 191, 99)",
+							min: 0,
+							max: Math.max(...new_cases) * 3 / 2
+						}
+					}],
+					xAxes: [{
+	                    ticks: {
+	                        fontColor: "rgb(23, 191, 99)",
+	                    }
+	                }]
+				},
+		    	chartArea: {
+					backgroundColor: 'rgb(25, 39, 52)'
+				}
+			}
+		};
+		new_deaths = new_deaths.map( x => x ? x : 0);
+		var config2 = {
+			type: 'line',
+			data: {
+				labels: labels,//.concat(["+1", "+2", "+3", "+4", "+5", "+6", "+7", "+8", "+9", "+10", "+11", "+12", "+13", "+14", "+15", "+16", "+17", "+18", "+19", "+20", "+21", "+22", "+23", "+24", "+25", "+26", "+27", "+28", "+29", "+30", "+31"]),
+				datasets: [{
+					label: 'Moyenne glissante décès quotidiens',
+					backgroundColor: window.chartColors.red,
+					borderColor: window.chartColors.red,
+					data: new_deaths_sm,
+					fill: false,
+				}, {
+					label: 'Décès quotidiens',
+					backgroundColor: window.chartColors.blue,
+					borderColor: window.chartColors.blue,
+					data: new_deaths,
+					borderDash: [1, 1],
+					fill: false,
+				}]
+			},
+			options: {
+				legend: {
+	                labels: {
+	                    fontColor: "rgb(23, 191, 99)",
+	                    // fontSize: 18
+	                }
+	            },
+				responsive: true,
+				title: {
+					display: true,
+					text: 'décès et cas COVID-19'
+				},
+				scales: {
+					yAxes: [{
+						ticks: {
+							fontColor: "rgb(23, 191, 99)",
+							min: 0,
+							max: Math.max(...new_deaths) * 3 / 2
+						}
+					}],
+					xAxes: [{
+	                    ticks: {
+	                        fontColor: "rgb(23, 191, 99)",
+	                    }
+	                }]
+				},
+		    	chartArea: {
+					backgroundColor: 'rgb(25, 39, 52)'
+				}
+			}
+		};
+	var ctx = document.getElementById('canvas_month_complete_cases').getContext('2d');
+	window.myLine_year_case = new Chart(ctx, config);
+	var ctx = document.getElementById('canvas_month_complete_deaths').getContext('2d');
+	window.myLine_year_death = new Chart(ctx, config2);
 
 }
 
