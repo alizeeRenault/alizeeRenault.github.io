@@ -125,6 +125,13 @@
 	<div class="monthd data" style="width:85%;display: none;">
 		<canvas id="canvas_month_FRA_deaths"></canvas>
 	</div>
+ 	<h1>CompleteVizualizer</h1>
+	<div class="year data" style="width:85%;display: none;">
+		<canvas id="canvas_month_complete_cases"></canvas>
+	</div>
+	<div class="yeard data" style="width:85%;display: none;">
+		<canvas id="canvas_month_complete_deaths"></canvas>
+	</div>
 	  <hr>
 		<br><br><br><br>
 	  </br>
@@ -148,6 +155,7 @@
 		function get_belgium () {
 			load_vaccine_BEL(data_gl.BEL);
 			load_month_view(data_gl.BEL);
+			load_year_view(data_gl.BEL);
 
 			$(".vaccination_bel").show();
 			$(".vaccination_israel").hide();
@@ -157,10 +165,13 @@
 			$(".button_israel").show();
 			$(".month").show();
 			$(".monthd").show();
+			$(".year").show();
+			$(".yeard").show();
 		}
 		function get_israel () {
 			load_vaccine_ISR(data_gl.ISR);
 			load_month_view(data_gl.ISR);
+			load_year_view(data_gl.ISR);
 
 			$(".vaccination_bel").hide();
 			$(".vaccination_israel").show();
@@ -170,10 +181,13 @@
 			$(".button_israel").hide();
 			$(".month").show();
 			$(".monthd").show();
+			$(".year").show();
+			$(".yeard").show();
 		}
 		function get_france () {
 			load_vaccine(data_gl.FRA);
 			load_month_view(data_gl.FRA);
+			load_year_view(data_gl.FRA);
 
 			$(".vaccination_bel").hide();
 			$(".vaccination_israel").hide();
@@ -183,6 +197,8 @@
 			$(".button_israel").show();
 			$(".month").show();
 			$(".monthd").show();
+			$(".year").show();
+			$(".yeard").show();
 		}
 
 		window.onload = function() {
@@ -192,10 +208,13 @@
 				load_vaccine(data.FRA);
 
 				load_month_view(data.FRA);
+				load_year_view(data.FRA);
 
 				data_gl = data;
 				$(".month").show();
 				$(".monthd").show();
+				$(".year").show();
+				$(".yeard").show();
 				$(".button_bel").show();
 				$(".button_israel").show();
 			}).fail(function() {
