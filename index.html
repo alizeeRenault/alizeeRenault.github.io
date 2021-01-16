@@ -65,92 +65,68 @@
 				animation-timing-function: ease;
 			}
 		}
+		.data {
+			margin: auto;
+			margin-top: 50px;
+			margin-bottom: 35px;
+		}
+		h1 {
+			text-align: center;
+		}
+		nav {
+			padding: 10px;
+			background-color: rgb(25, 39, 52);
+			height: 55px;
+		}
+		nav a {
+			color: rgb(23, 191, 99);
+			padding: 15px;
+			margin: 0 10px;
+			text-decoration: none;
+			border: 2px solid rgb(23, 191, 99);
+			height: 22px;
+		}
 	</style>
 </head>
   
- <body style="background-color: rgb(21, 32, 43);color: rgb(23, 191, 99);">
+ <body style="background-color: rgb(21, 32, 43);color: rgb(23, 191, 99);margin: 0px;">
+ 	<nav style="display:flex;">
+		<a href="#belgique" class="button_bel" style="display: none;" onclick="get_belgium()">Données vaccinations Belgique</a>
+		<a href="#france" class="button_france" style="display: none;" onclick="get_france()">Données vaccinations France</a>
+		<a href="#israel" class="button_israel" style="display: none;" onclick="get_israel()">Données vaccinations Israël</a>
+ 	</nav>
+
+
+	<br><br><br><br>
+	<div style="margin: auto;text-align: center;">
+		<i style="" >All informations are fetched from OWI data.</i><br>
+	</div>
+ 	<h1>VaccinVizualizer</h1>
 	<div class="loader_vaccination loader">
 		<div class="loader__lightning"></div>
 	</div>
-	<div id="france" class="vaccination" style="width:85%;display: none;">
+	<div id="france" class="vaccination data" style="width:85%;display: none;">
 		<canvas id="canvas"></canvas>
 	</div>
 
-	<div id="belgique" class="vaccination_bel" style="width:85%;display: none;">
+	<div id="belgique" class="vaccination_bel data" style="width:85%;display: none;">
 		<canvas id="canvas_bel"></canvas>
 	</div>
-	<div id="israel" class="vaccination_israel" style="width:85%;display: none;">
+	<div id="israel" class="vaccination_israel data" style="width:85%;display: none;">
 		<canvas id="canvas_israel"></canvas>
 	</div>
 	<br>
-	<a href="#belgique" class="button_bel" style="display: none;" onclick="get_belgium()">Belgique</a>
-	<a href="#france" class="button_france" style="display: none;" onclick="get_france()">France</a>
-	<a href="#israel" class="button_israel" style="display: none;" onclick="get_israel()">Israël</a>
 	<br>
-	<br>
-	<br>
-	<div style="display: flex;">
-		<div style="width:45%;">
-			<canvas id="canvas_cases"></canvas>
-		</div>
-		<div style="width:45%;">
-			<canvas id="canvas_deaths"></canvas>
-		</div>
+ 	<h1>CasesVizualizer</h1>
+	<div class="month data" style="width:85%;display: none;">
+		<canvas id="canvas_month_FRA_cases"></canvas>
 	</div>
-	<script>
-
-
-		var data_gl = {};
-
-		function get_belgium () {
-			load_vaccine_BEL(data_gl.BEL);
-
-			$(".vaccination_bel").show();
-			$(".vaccination_israel").hide();
-			$(".vaccination").hide();
-			$(".button_bel").hide();
-			$(".button_france").show();
-			$(".button_israel").show();
-		}
-		function get_israel () {
-			load_vaccine_ISR(data_gl.ISR);
-
-			$(".vaccination_bel").hide();
-			$(".vaccination_israel").show();
-			$(".vaccination").hide();
-			$(".button_bel").show();
-			$(".button_france").show();
-			$(".button_israel").hide();
-		}
-		function get_france () {
-			load_vaccine(data_gl.FRA);
-
-			$(".vaccination_bel").hide();
-			$(".vaccination_israel").hide();
-			$(".vaccination").show();
-			$(".button_bel").show();
-			$(".button_france").hide();
-			$(".button_israel").show();
-		}
-
-		window.onload = function() {
-			$.get( "https://covid.ourworldindata.org/data/owid-covid-data.json", function( data ) {
-				$(".loader_vaccination").hide();
-				$(".vaccination").show();
-				load_vaccine(data.FRA);
-				data_gl = data;
-				$(".button_bel").show();
-				$(".button_israel").show();
-			}).fail(function() {
-				console.log( "error" );
-			});
-			
-			var ctx1 = document.getElementById('canvas_deaths').getContext('2d');
-			window.myLine = new Chart(ctx1, config_deaths);
-			var ctx2 = document.getElementById('canvas_cases').getContext('2d');
-			window.myLine = new Chart(ctx2, config_cases);
-		};
-	</script>
+ 	<h1>DeathsVizualizer</h1>
+	<div class="monthd data" style="width:85%;display: none;">
+		<canvas id="canvas_month_FRA_deaths"></canvas>
+	</div>
+	  <hr>
+		<br><br><br><br>
 	  </br>
 	  <div>
 	   <i>
@@ -159,12 +135,77 @@
 	   Other data based on this work : Hasell, J., Mathieu, E., Beltekian, D. et al. A cross-country database of COVID-19 testing. Sci Data 7, 345 (2020). <a href="https://doi.org/10.1038/s41597-020-00688-8">https://doi.org/10.1038/s41597-020-00688-8</a>
 		</i>
 
-		<br><br><br><br>
-		<i>Informations about cases and deaths are not updated anymore for now - will be updated soon</i><br>
-		<i>Loading can be long, because we project to load all information localy (for many countries) and these will be shown soon</i><br>
 	</div>
 
 
 </body>
 
+	<script>
+
+
+		var data_gl = {};
+
+		function get_belgium () {
+			load_vaccine_BEL(data_gl.BEL);
+			load_month_view(data_gl.BEL);
+
+			$(".vaccination_bel").show();
+			$(".vaccination_israel").hide();
+			$(".vaccination").hide();
+			$(".button_bel").hide();
+			$(".button_france").show();
+			$(".button_israel").show();
+			$(".month").show();
+			$(".monthd").show();
+		}
+		function get_israel () {
+			load_vaccine_ISR(data_gl.ISR);
+			load_month_view(data_gl.ISR);
+
+			$(".vaccination_bel").hide();
+			$(".vaccination_israel").show();
+			$(".vaccination").hide();
+			$(".button_bel").show();
+			$(".button_france").show();
+			$(".button_israel").hide();
+			$(".month").show();
+			$(".monthd").show();
+		}
+		function get_france () {
+			load_vaccine(data_gl.FRA);
+			load_month_view(data_gl.FRA);
+
+			$(".vaccination_bel").hide();
+			$(".vaccination_israel").hide();
+			$(".vaccination").show();
+			$(".button_bel").show();
+			$(".button_france").hide();
+			$(".button_israel").show();
+			$(".month").show();
+			$(".monthd").show();
+		}
+
+		window.onload = function() {
+			$.get( "https://covid.ourworldindata.org/data/owid-covid-data.json", function( data ) {
+				$(".loader_vaccination").hide();
+				$(".vaccination").show();
+				load_vaccine(data.FRA);
+
+				load_month_view(data.FRA);
+
+				data_gl = data;
+				$(".month").show();
+				$(".monthd").show();
+				$(".button_bel").show();
+				$(".button_israel").show();
+			}).fail(function() {
+				console.log( "error" );
+			});
+			
+			// var ctx1 = document.getElementById('canvas_deaths').getContext('2d');
+			// window.myLine = new Chart(ctx1, config_deaths);
+			// var ctx2 = document.getElementById('canvas_cases').getContext('2d');
+			// window.myLine = new Chart(ctx2, config_cases);
+		};
+	</script>
 </html>
