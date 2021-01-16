@@ -354,7 +354,7 @@ function load_month_view(country) {
 					borderDash: [1, 1],
 					fill: false,
 				}, {
-					label: 'Moyenne glissante cas quotidiens',
+					label: 'Moyenne cas quotidiens',
 					backgroundColor: window.chartColors.red,
 					borderColor: window.chartColors.red,
 					data: new_cases_sm,
@@ -405,7 +405,7 @@ function load_month_view(country) {
 					borderDash: [1, 1],
 					fill: false,
 				}, {
-					label: 'Moyenne glissante décès quotidiens',
+					label: 'Moyenne décès quotidiens',
 					backgroundColor: window.chartColors.red,
 					borderColor: window.chartColors.red,
 					data: new_deaths_sm,
@@ -471,7 +471,7 @@ function load_year_view(country) {
 			data: {
 				labels: labels,//.concat(["+1", "+2", "+3", "+4", "+5", "+6", "+7", "+8", "+9", "+10", "+11", "+12", "+13", "+14", "+15", "+16", "+17", "+18", "+19", "+20", "+21", "+22", "+23", "+24", "+25", "+26", "+27", "+28", "+29", "+30", "+31"]),
 				datasets: [{
-					label: 'Moyenne glissante cas quotidiens',
+					label: 'Moyenne cas quotidiens',
 					backgroundColor: window.chartColors.red,
 					borderColor: window.chartColors.red,
 					data: new_cases_sm,
@@ -522,7 +522,7 @@ function load_year_view(country) {
 			data: {
 				labels: labels,//.concat(["+1", "+2", "+3", "+4", "+5", "+6", "+7", "+8", "+9", "+10", "+11", "+12", "+13", "+14", "+15", "+16", "+17", "+18", "+19", "+20", "+21", "+22", "+23", "+24", "+25", "+26", "+27", "+28", "+29", "+30", "+31"]),
 				datasets: [{
-					label: 'Moyenne glissante décès quotidiens',
+					label: 'Moyenne décès quotidiens',
 					backgroundColor: window.chartColors.red,
 					borderColor: window.chartColors.red,
 					data: new_deaths_sm,
