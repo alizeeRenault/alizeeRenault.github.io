@@ -99,9 +99,10 @@
   
  <body style="background-color: rgb(21, 32, 43);color: rgb(23, 191, 99);margin: 0px;">
  	<nav style="display:flex;">
-		<a href="#belgique" class="button_bel" style="display: none;" onclick="get_belgium()">Données vaccinations Belgique</a>
 		<a href="#france" class="button_france" style="display: none;" onclick="get_france()">Données vaccinations France</a>
+		<a href="#belgique" class="button_bel" style="display: none;" onclick="get_belgium()">Données vaccinations Belgique</a>
 		<a href="#israel" class="button_israel" style="display: none;" onclick="get_israel()">Données vaccinations Israël</a>
+		<a href="#usa" class="button_usa" style="display: none;" onclick="get_usa()">Données vaccinations USA</a>
 		<div class="twitter-alizee">
 			<a href="https://twitter.com/AlizeeRenault?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @AlizeeRenault</a>
 			<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
@@ -126,6 +127,10 @@
 	</div>
 	<div class="vaccination_israel data" style="width:85%;display: none;">
 		<canvas id="canvas_israel"></canvas>
+	</div>
+
+	<div class="vaccination_usa data" style="width:85%;display: none;">
+		<i>will be available soon ... </i>
 	</div>
 	<br>
 	<br>
@@ -169,6 +174,25 @@
 
 		var data_gl = {};
 
+		function get_usa () {
+			// load_vaccine_BEL(data_gl.BEL);
+			load_month_view(data_gl.USA);
+			load_year_view(data_gl.USA);
+
+			$(".vaccination_usa").show();
+			$(".vaccination_bel").hide();
+			$(".vaccination_israel").hide();
+			$(".vaccination").hide();
+			$(".button_usa").hide();
+			$(".button_france").show();
+			$(".button_israel").show();
+			$(".button_bel").show();
+			$(".month").show();
+			$(".monthd").show();
+			$(".year").show();
+			$(".yeard").show();
+		}
+
 		function get_belgium () {
 			load_vaccine_BEL(data_gl.BEL);
 			load_month_view(data_gl.BEL);
@@ -179,6 +203,7 @@
 			$(".vaccination").hide();
 			$(".button_bel").hide();
 			$(".button_france").show();
+			$(".button_usa").show();
 			$(".button_israel").show();
 			$(".month").show();
 			$(".monthd").show();
@@ -195,6 +220,7 @@
 			$(".vaccination").hide();
 			$(".button_bel").show();
 			$(".button_france").show();
+			$(".button_usa").show();
 			$(".button_israel").hide();
 			$(".month").show();
 			$(".monthd").show();
@@ -212,6 +238,7 @@
 			$(".button_bel").show();
 			$(".button_france").hide();
 			$(".button_israel").show();
+			$(".button_usa").show();
 			$(".month").show();
 			$(".monthd").show();
 			$(".year").show();
@@ -233,6 +260,7 @@
 				$(".year").show();
 				$(".yeard").show();
 				$(".button_bel").show();
+				$(".button_usa").show();
 				$(".button_israel").show();
 			}).fail(function() {
 				console.log( "error" );
