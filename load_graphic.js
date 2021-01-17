@@ -32,7 +32,8 @@ function load_vaccine_generic(country) {
 		}
 		var new_vaccinations = sliced_arr.map(x => x.new_vaccinations ? x.new_vaccinations : 0);
 		var length = sliced_arr.length;
-		var origin = sliced_arr[length - 1].total_vaccinations;
+		var origin = sliced_arr[length - 1].total_vaccinations ? sliced_arr[length - 1].total_vaccinations : sliced_arr[length - 2].total_vaccinations
+
 		
 		var moy_3_d = (new_vaccinations[length - 3] + new_vaccinations[length - 2] + new_vaccinations[length - 1]) / 3;
 		var moy_7_d = (new_vaccinations[length - 7] + new_vaccinations[length - 6] + new_vaccinations[length - 5] + new_vaccinations[length - 4] + new_vaccinations[length - 3] + new_vaccinations[length - 2] + new_vaccinations[length - 1]) / 7;
@@ -40,14 +41,6 @@ function load_vaccine_generic(country) {
 		var labels = sliced_arr.map(x => x.date);
 		var project_3_d = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31].map( x => origin + (moy_3_d * x))
 		var project_7_d = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31].map( x => origin + (moy_7_d * x))
-		console.log(sliced_arr);
-		console.log(total_vaccinations);
-		console.log(new_vaccinations);
-		console.log(project_3_d);
-		console.log(project_7_d);
-		console.log(moy_3_d);
-		console.log(moy_7_d);
-		console.log(origin);
 		var config = {
 			type: 'line',
 			data: {
