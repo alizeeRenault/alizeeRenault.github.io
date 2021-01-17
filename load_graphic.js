@@ -47,6 +47,7 @@ function load_vaccine_generic(country) {
 		console.log(project_7_d);
 		console.log(moy_3_d);
 		console.log(moy_7_d);
+		console.log(origin);
 		var config = {
 			type: 'line',
 			data: {
