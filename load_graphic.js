@@ -32,7 +32,7 @@ function load_vaccine_generic(country) {
 		}
 		var new_vaccinations = sliced_arr.map(x => x.new_vaccinations ? x.new_vaccinations : 0);
 		var length = sliced_arr.length;
-		var origin = sliced_arr[length - 1].total_vaccinations ? sliced_arr[length - 1].total_vaccinations : sliced_arr[length - 2].total_vaccinations
+		var origin = tot;
 
 		
 		var moy_3_d = (new_vaccinations[length - 3] + new_vaccinations[length - 2] + new_vaccinations[length - 1]) / 3;
